@@ -1,0 +1,681 @@
+<html>
+    <head>
+
+        <script 
+            src="https://code.jquery.com/jquery-3.4.1.slim.min.js" 
+            integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" 
+            crossorigin="anonymous">
+        </script>
+
+        <style>
+
+            .cont {
+                padding: 0px 0px 20px 20px;
+            }
+
+            .box, .box-insert {
+                background-color: #f64738;
+                border: 0px solid #000;
+                width: 100px;
+                height: 100px;
+                display: inline-block;
+                padding:10px 0px 0px 0px;
+                margin: 0px 0px 0px -5px;
+            }
+
+            .icon {
+                display: none;
+                visibility:hidden;
+                color: rgb(100, 200, 100);
+            }
+
+            p {
+                font-size: 20px;
+                padding: 0px 80px 0px 20px;
+            }
+
+        </style>
+
+        <script type="text/javascript">
+
+            colors = [
+                [
+                    'rgb(100, 100, 100)', 
+                    'rgb(100, 110, 100)', 
+                    'rgb(100, 120, 100)', 
+                    'rgb(100, 130, 100)', 
+                    'rgb(100, 140, 100)', 
+                    'rgb(100, 150, 100)', 
+                    'rgb(100, 160, 100)', 
+                    'rgb(100, 170, 100)', 
+                    'rgb(100, 180, 100)', 
+                    'rgb(100, 190, 100)'
+                ],
+                [
+                    'rgb(100, 100, 100)', 
+                    'rgb(110, 110, 100)', 
+                    'rgb(120, 120, 100)', 
+                    'rgb(130, 130, 100)', 
+                    'rgb(140, 140, 100)', 
+                    'rgb(150, 150, 100)', 
+                    'rgb(160, 160, 100)', 
+                    'rgb(170, 170, 100)', 
+                    'rgb(180, 180, 100)', 
+                    'rgb(190, 190, 100)'
+                ],
+                [
+                    'rgb(100, 100, 100)', 
+                    'rgb(110, 100, 100)', 
+                    'rgb(120, 100, 100)', 
+                    'rgb(130, 100, 100)', 
+                    'rgb(140, 100, 100)', 
+                    'rgb(150, 100, 100)', 
+                    'rgb(160, 100, 100)', 
+                    'rgb(170, 100, 100)', 
+                    'rgb(180, 100, 100)', 
+                    'rgb(190, 100, 100)'
+                ],
+                [
+                    'rgb(100, 100, 100)', 
+                    'rgb(120, 100, 110)', 
+                    'rgb(130, 100, 120)', 
+                    'rgb(140, 100, 130)', 
+                    'rgb(150, 100, 140)', 
+                    'rgb(160, 100, 150)', 
+                    'rgb(170, 100, 160)', 
+                    'rgb(180, 100, 170)', 
+                    'rgb(190, 100, 180)', 
+                    'rgb(200, 100, 200)'
+                ],
+                [
+                    'rgb(100, 100, 100)', 
+                    'rgb(110, 110, 110)', 
+                    'rgb(120, 120, 120)', 
+                    'rgb(130, 130, 130)', 
+                    'rgb(140, 140, 140)', 
+                    'rgb(150, 150, 150)', 
+                    'rgb(160, 160, 160)', 
+                    'rgb(170, 170, 170)', 
+                    'rgb(180, 180, 180)', 
+                    'rgb(190, 190, 190)'
+                ],
+                [
+                    'rgb(100, 100, 100)', 
+                    'rgb(120, 90, 110)', 
+                    'rgb(130, 80, 120)', 
+                    'rgb(140, 70, 130)', 
+                    'rgb(150, 60, 140)', 
+                    'rgb(160, 50, 150)', 
+                    'rgb(170, 40, 160)', 
+                    'rgb(180, 30, 170)', 
+                    'rgb(190, 20, 180)', 
+                    'rgb(200, 10, 200)'
+                ],
+                [
+                    'rgb(100, 100, 100)', 
+                    'rgb(90, 110, 110)', 
+                    'rgb(80, 120, 120)', 
+                    'rgb(70, 130, 130)', 
+                    'rgb(60, 140, 140)', 
+                    'rgb(50, 150, 150)', 
+                    'rgb(40, 160, 160)', 
+                    'rgb(30, 170, 170)', 
+                    'rgb(20, 180, 180)', 
+                    'rgb(10, 190, 190)'
+                ],
+                [
+                    'rgb(100, 100, 100)', 
+                    'rgb(100, 110, 100)', 
+                    'rgb(100, 120, 100)', 
+                    'rgb(100, 130, 100)', 
+                    'rgb(100, 140, 100)', 
+                    'rgb(100, 150, 100)', 
+                    'rgb(100, 160, 100)', 
+                    'rgb(100, 170, 100)', 
+                    'rgb(100, 180, 100)', 
+                    'rgb(100, 190, 100)'
+                ],
+                [
+                    'rgb(100, 100, 100)', 
+                    'rgb(100, 110, 110)', 
+                    'rgb(100, 120, 120)', 
+                    'rgb(100, 130, 130)', 
+                    'rgb(100, 140, 140)', 
+                    'rgb(100, 150, 150)', 
+                    'rgb(100, 160, 160)', 
+                    'rgb(100, 170, 170)', 
+                    'rgb(100, 180, 180)', 
+                    'rgb(100, 190, 190)'
+                ],
+                [
+                    'rgb(100, 100, 100)', 
+                    'rgb(100, 110, 90)', 
+                    'rgb(100, 120, 80)', 
+                    'rgb(100, 130, 70)', 
+                    'rgb(100, 140, 60)', 
+                    'rgb(100, 150, 50)', 
+                    'rgb(100, 160, 40)', 
+                    'rgb(100, 170, 30)', 
+                    'rgb(100, 180, 20)', 
+                    'rgb(100, 190, 10)'
+                ],
+                [
+                    'rgb(100, 100, 100)', 
+                    'rgb(110, 100, 100)', 
+                    'rgb(120, 100, 100)', 
+                    'rgb(130, 100, 100)', 
+                    'rgb(140, 100, 100)', 
+                    'rgb(150, 100, 100)', 
+                    'rgb(160, 100, 100)', 
+                    'rgb(170, 100, 100)', 
+                    'rgb(180, 100, 100)', 
+                    'rgb(190, 100, 100)'
+                ],
+                [
+                    'rgb(100, 100, 100)', 
+                    'rgb(120, 100, 110)', 
+                    'rgb(130, 100, 120)', 
+                    'rgb(140, 100, 130)', 
+                    'rgb(150, 100, 140)', 
+                    'rgb(160, 100, 150)', 
+                    'rgb(170, 100, 160)', 
+                    'rgb(180, 100, 170)', 
+                    'rgb(190, 100, 180)', 
+                    'rgb(200, 100, 200)'
+                ]
+            ];
+
+            var shuffles = [
+                [0, 5, 7, 1, 9, 6, 3, 4, 8, 2],
+                [8, 9, 6, 2, 7, 0, 1, 4, 5, 3],
+                [1, 8, 4, 0, 3, 5, 6, 7, 2, 9],
+                [9, 7, 0, 4, 8, 1, 2, 6, 5, 3],
+                [1, 9, 2, 8, 0, 7, 4, 5, 3, 6],
+                [2, 4, 1, 0, 9, 3, 8, 7, 6, 5],
+                [0, 5, 7, 1, 9, 6, 3, 4, 8, 2],
+                [8, 9, 6, 2, 7, 0, 1, 4, 5, 3],
+                [1, 8, 4, 0, 3, 5, 6, 7, 2, 9],
+                [9, 7, 0, 4, 8, 1, 2, 6, 5, 3],
+                [1, 9, 2, 8, 0, 7, 4, 5, 3, 6],
+                [2, 4, 1, 0, 9, 3, 8, 7, 6, 5],
+            ];
+
+            var expOrder = [
+                [0, 1, 2, 3, 4, 5], 
+                [6, 7, 8, 9, 10, 11]
+            ];
+
+            var moves = [
+                    [],
+                    [],
+                    [],
+                    [],
+                    [],
+                    [],
+                    [],
+                    [],
+                    [],
+                    [],
+                    [],
+                    []
+                ];
+
+            $(document).ready( function(){
+
+                fillColors();
+                var currColor = "";
+                var colorSwatch;
+
+                $(".box").click( function(event) {
+                    if (currColor == "") {
+                        currColor = $( this ).css( "background-color" );
+                        colorSwatch = $(this).attr('id');
+                        $(this).css("border", "2px solid #000");
+                    }
+                    else {
+                        // check that both are from same gradient set
+                        id = $(this).attr('id');
+                        setNum = id.substring(4);
+                        place = id.charAt(0);
+                        $("#" + colorSwatch).css("border", "none");
+                        if(id.substring(1) == colorSwatch.substring(1) && !checkComplete(setNum)) {
+                            moves[expOrder[setNum]].push([colors[setNum].indexOf(currColor), parseInt(colorSwatch.charAt(0)), parseInt(id.charAt(0))]);
+
+                            // swap colors if they are
+                            var swatch = $(this).css("background-color");
+                            $(this).css("background-color", currColor);
+                            $("#"+colorSwatch).css("background-color", swatch);
+                        }
+
+                        // reset values 
+                        currColor = "";
+                        if (checkComplete(setNum)) {
+                            // console.log(id.charAt(5));
+                            $("#icon" + setNum).css("visibility", "visible");
+                            // console.log(moves[setNum]);
+                            if (allDone()) {
+                                download('trial.txt', 'text/plain');
+                            }
+                        }
+                    }
+
+                });
+
+                $(".box-insert").click( function(event) {
+                    if (currColor == "") {
+                        currColor = $( this ).css( "background-color" );
+                        colorSwatch = $(this).attr('id');
+                        $(this).css("border", "2px solid #000");
+                    }
+                    else {
+                        $("#" + colorSwatch).css("border", "none");
+                        // check that both are from same gradient set
+                        id = $(this).attr('id');
+                        setNum = id.substring(4);
+                        place = id.charAt(0);
+                        if(id.substring(1) == colorSwatch.substring(1) && !checkComplete(setNum)) {
+                            moves[expOrder[setNum]].push([colors[setNum].indexOf(currColor), parseInt(colorSwatch.charAt(0)), parseInt(id.charAt(0))]);
+
+                            // swap colors if they are
+                            var swatch = $(this).css("background-color");
+
+                            if (colorSwatch.charAt(0) > place) {
+                                for (i = colorSwatch.charAt(0); i > place; i--) {
+                                    var color = $("#" + parseInt(i-1) + colorSwatch.substring(1)).css("background-color");
+                                    $("#" + parseInt(i) + id.substring(1)).css("background-color", color);
+                                }
+                                $(this).css("background-color", currColor);
+                            } else {
+                                for (i = place; i > colorSwatch.charAt(0); i--) {
+                                    var color = $("#" + parseInt(i-1) + colorSwatch.substring(1)).css("background-color");
+                                    $("#" + parseInt(i) + id.substring(1)).css("background-color", color);
+                                }
+                                $("#" + colorSwatch).css("background-color", swatch);
+                            }
+                        }
+
+                        // reset values 
+                        currColor = "";
+                        if (checkComplete(setNum)) {
+                            $("#icon" + setNum).css("visibility", "visible");
+                            if (allDone()) {
+                                download('trial.txt', 'text/plain');
+                            }
+                        }
+                    }
+
+                });
+
+                function checkComplete(seqNum) {
+                    for (var i = colors[seqNum].length - 1; i >= 0; i--) {
+                        idNum = "#" + i + "box" + seqNum;
+                        if ($(idNum).css("background-color") != colors[seqNum][i]) {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+
+                function fillColors() {
+                    expOrder[0] = shuffle(expOrder[0]);
+                    expOrder[1] = shuffle(expOrder[1]);
+                    expOrder = expOrder[0].concat(expOrder[1]);
+                    for (var j = 0; j < colors.length; j++) {
+                        for (var i = 0; i < shuffles[j].length; i++) {
+                            id = "#" + i + "box" + j;
+                            $(id).css("background-color", colors[j][shuffles[expOrder[j]][i]]);
+                        }
+                    }
+                };
+
+                function shuffle(a) {
+                    var j, x, i;
+                    b = a.slice(0);
+                    for (i = b.length - 1; i > 0; i--) {
+                        j = Math.floor(Math.random() * (i + 1));
+                        x = b[i];       
+                        b[i] = b[j];
+                        b[j] = x;
+                    }
+                    return b;
+                };
+
+                function allDone() {
+                    for (var i = 0; i < colors.length; i++) {
+                        if (!checkComplete(i)) {
+                            return false;
+                        }
+                    }
+                    return true;
+                };
+
+            });
+
+            function download(filename, type) {
+                var file = new Blob([JSON.stringify(moves)], {type: type});
+                if (window.navigator.msSaveOrOpenBlob) // IE10+
+                    window.navigator.msSaveOrOpenBlob(file, filename);
+                else { // Others
+                    var a = document.createElement("a"),
+                            url = URL.createObjectURL(file);
+                    a.href = url;
+                    a.download = filename;
+                    document.body.appendChild(a);
+                    a.click();
+                    setTimeout(function() {
+                        document.body.removeChild(a);
+                        window.URL.revokeObjectURL(url);  
+                    }, 0); 
+                }
+            };
+
+        </script>
+
+        <script src="https://kit.fontawesome.com/23080383dc.js" crossorigin="anonymous"></script>
+
+    </head>
+
+    <body>
+
+        <p>In each of the sets below, you will sort the colors so that, with the grey color on the left, they are in a gradient order. To move colors, you click one box and then the next, which will insert the color you select into the list, with all colors in between shifting place.</p>
+        <p>When all the colors are in the correct order, a checkmark will appear next to the question number and you should move on to the next question.</p>
+
+
+        <div class="cont">
+            <h1>Question Seven <i class="fas fa-check-square icon" id="icon6"></i></h1>
+            <div class="box-insert" id="0box6">
+            </div>
+            <div class="box-insert" id="1box6">
+            </div>
+            <div class="box-insert" id="2box6">
+            </div>
+            <div class="box-insert" id="3box6">
+            </div>
+            <div class="box-insert" id="4box6">
+            </div>
+            <div class="box-insert" id="5box6">
+            </div>
+            <div class="box-insert" id="6box6">
+            </div>
+            <div class="box-insert" id="7box6">
+            </div>
+            <div class="box-insert" id="8box6">
+            </div>
+            <div class="box-insert" id="9box6">
+            </div>
+        </div>
+
+        <div class="cont">
+            <h1>Question Eight <i class="fas fa-check-square icon" id="icon7"></i></h1>
+            <div class="box-insert" id="0box7">
+            </div>
+            <div class="box-insert" id="1box7">
+            </div>
+            <div class="box-insert" id="2box7">
+            </div>
+            <div class="box-insert" id="3box7">
+            </div>
+            <div class="box-insert" id="4box7">
+            </div>
+            <div class="box-insert" id="5box7">
+            </div>
+            <div class="box-insert" id="6box7">
+            </div>
+            <div class="box-insert" id="7box7">
+            </div>
+            <div class="box-insert" id="8box7">
+            </div>
+            <div class="box-insert" id="9box7">
+            </div>
+        </div>
+
+        <div class="cont">
+            <h1>Question Nine <i class="fas fa-check-square icon" id="icon8"></i></h1>
+            <div class="box-insert" id="0box8">
+            </div>
+            <div class="box-insert" id="1box8">
+            </div>
+            <div class="box-insert" id="2box8">
+            </div>
+            <div class="box-insert" id="3box8">
+            </div>
+            <div class="box-insert" id="4box8">
+            </div>
+            <div class="box-insert" id="5box8">
+            </div>
+            <div class="box-insert" id="6box8">
+            </div>
+            <div class="box-insert" id="7box8">
+            </div>
+            <div class="box-insert" id="8box8">
+            </div>
+            <div class="box-insert" id="9box8">
+            </div>
+        </div>
+
+        <div class="cont">
+            <h1>Question Ten <i class="fas fa-check-square icon" id="icon9"></i></h1>
+            <div class="box-insert" id="0box9">
+            </div>
+            <div class="box-insert" id="1box9">
+            </div>
+            <div class="box-insert" id="2box9">
+            </div>
+            <div class="box-insert" id="3box9">
+            </div>
+            <div class="box-insert" id="4box9">
+            </div>
+            <div class="box-insert" id="5box9">
+            </div>
+            <div class="box-insert" id="6box9">
+            </div>
+            <div class="box-insert" id="7box9">
+            </div>
+            <div class="box-insert" id="8box9">
+            </div>
+            <div class="box-insert" id="9box9">
+            </div>
+        </div>
+        <div class="cont">
+            <h1>Question Eleven <i class="fas fa-check-square icon" id="icon10"></i></h1>
+            <div class="box-insert" id="0box10">
+            </div>
+            <div class="box-insert" id="1box10">
+            </div>
+            <div class="box-insert" id="2box10">
+            </div>
+            <div class="box-insert" id="3box10">
+            </div>
+            <div class="box-insert" id="4box10">
+            </div>
+            <div class="box-insert" id="5box10">
+            </div>
+            <div class="box-insert" id="6box10">
+            </div>
+            <div class="box-insert" id="7box10">
+            </div>
+            <div class="box-insert" id="8box10">
+            </div>
+            <div class="box-insert" id="9box10">
+            </div>
+        </div>
+        <div class="cont">
+            <h1>Question Twelve <i class="fas fa-check-square icon" id="icon11"></i></h1>
+            <div class="box-insert" id="0box11">
+            </div>
+            <div class="box-insert" id="1box11">
+            </div>
+            <div class="box-insert" id="2box11">
+            </div>
+            <div class="box-insert" id="3box11">
+            </div>
+            <div class="box-insert" id="4box11">
+            </div>
+            <div class="box-insert" id="5box11">
+            </div>
+            <div class="box-insert" id="6box11">
+            </div>
+            <div class="box-insert" id="7box11">
+            </div>
+            <div class="box-insert" id="8box11">
+            </div>
+            <div class="box-insert" id="9box11">
+            </div>
+        </div>
+        <div class="cont">
+        <h1>Part 2</h1>
+        <p>Now, instead of inserting the item into the list, the two colors you select will swap locations, and the locations of all other colors will stay the same.</p>
+    </div>
+
+        <div class="cont">
+            <h1>Question One <i class="fas fa-check-square icon" id="icon0"></i></h1>
+            <div class="box" id="0box0">
+            </div>
+            <div class="box" id="1box0">
+            </div>
+            <div class="box" id="2box0">
+            </div>
+            <div class="box" id="3box0">
+            </div>
+            <div class="box" id="4box0">
+            </div>
+            <div class="box" id="5box0">
+            </div>
+            <div class="box" id="6box0">
+            </div>
+            <div class="box" id="7box0">
+            </div>
+            <div class="box" id="8box0">
+            </div>
+            <div class="box" id="9box0">
+            </div>
+        </div>
+
+        <div class="cont">
+            <h1>Question Two <i class="fas fa-check-square icon" id="icon1"></i></h1>
+            <div class="box" id="0box1">
+            </div>
+            <div class="box" id="1box1">
+            </div>
+            <div class="box" id="2box1">
+            </div>
+            <div class="box" id="3box1">
+            </div>
+            <div class="box" id="4box1">
+            </div>
+            <div class="box" id="5box1">
+            </div>
+            <div class="box" id="6box1">
+            </div>
+            <div class="box" id="7box1">
+            </div>
+            <div class="box" id="8box1">
+            </div>
+            <div class="box" id="9box1">
+            </div>
+        </div>
+
+        <div class="cont">
+            <h1>Question Three <i class="fas fa-check-square icon" id="icon2"></i></h1>
+            <div class="box" id="0box2">
+            </div>
+            <div class="box" id="1box2">
+            </div>
+            <div class="box" id="2box2">
+            </div>
+            <div class="box" id="3box2">
+            </div>
+            <div class="box" id="4box2">
+            </div>
+            <div class="box" id="5box2">
+            </div>
+            <div class="box" id="6box2">
+            </div>
+            <div class="box" id="7box2">
+            </div>
+            <div class="box" id="8box2">
+            </div>
+            <div class="box" id="9box2">
+            </div>
+        </div>
+
+        <div class="cont">
+            <h1>Question Four <i class="fas fa-check-square icon" id="icon3"></i></h1>
+            <div class="box" id="0box3">
+            </div>
+            <div class="box" id="1box3">
+            </div>
+            <div class="box" id="2box3">
+            </div>
+            <div class="box" id="3box3">
+            </div>
+            <div class="box" id="4box3">
+            </div>
+            <div class="box" id="5box3">
+            </div>
+            <div class="box" id="6box3">
+            </div>
+            <div class="box" id="7box3">
+            </div>
+            <div class="box" id="8box3">
+            </div>
+            <div class="box" id="9box3">
+            </div>
+        </div>
+
+        <div class="cont">
+            <h1>Question Five <i class="fas fa-check-square icon" id="icon4"></i></h1>
+            <div class="box" id="0box4">
+            </div>
+            <div class="box" id="1box4">
+            </div>
+            <div class="box" id="2box4">
+            </div>
+            <div class="box" id="3box4">
+            </div>
+            <div class="box" id="4box4">
+            </div>
+            <div class="box" id="5box4">
+            </div>
+            <div class="box" id="6box4">
+            </div>
+            <div class="box" id="7box4">
+            </div>
+            <div class="box" id="8box4">
+            </div>
+            <div class="box" id="9box4">
+            </div>
+        </div>
+
+        <div class="cont">
+            <h1>Question Six <i class="fas fa-check-square icon" id="icon5"></i></h1>
+            <div class="box" id="0box5">
+            </div>
+            <div class="box" id="1box5">
+            </div>
+            <div class="box" id="2box5">
+            </div>
+            <div class="box" id="3box5">
+            </div>
+            <div class="box" id="4box5">
+            </div>
+            <div class="box" id="5box5">
+            </div>
+            <div class="box" id="6box5">
+            </div>
+            <div class="box" id="7box5">
+            </div>
+            <div class="box" id="8box5">
+            </div>
+            <div class="box" id="9box5">
+            </div>
+        </div>
+
+        <!-- <p>In the sets below, rather than swapping two colors, you change the location of a color by inserting it into the list. The color you select by clicking will be inserted at the location you select, and all colors in between them will be shifted one space to the right.</p> -->
+
+        
+
+
+    </body>
+
+</html>
